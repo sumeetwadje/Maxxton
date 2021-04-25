@@ -1,0 +1,138 @@
+<div>
+  <table style="width:50%">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Joining Date</th>
+    </tr>
+    <ng-container *ngFor="let employee of candidate_data">
+      <tr>
+        <td>
+          <u style="color:blue" (click)="onSelect(employee)">
+            {{employee.id}}
+          </u>
+        </td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.department}}</td>
+        <td>{{employee.joining_date}}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
+<div>
+  <h3>1. Sort by name.</h3>
+  <button (click)="sortByName()">Sort by name</button><br><br>
+  <div *ngIf="sortByNameFlag">
+    <table style="width:50%">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Joining Date</th>
+      </tr>
+      <ng-container *ngFor="let employee of _tempArr">
+        <tr>
+          <td>{{employee.id}}</td>
+          <td>{{employee.name}}</td>
+          <td>{{employee.department}}</td>
+          <td>{{employee.joining_date}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  <h3>1. Sort by joining date.</h3>
+  <button (click)="sortByDate()">Sort by joining date</button>
+  <br>
+  <br>
+  <div *ngIf="sortByDateFlag">
+    <table style="width:50%">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Joining Date</th>
+      </tr>
+      <ng-container *ngFor="let employee of _tempArr">
+        <tr>
+          <td>{{employee.id}}</td>
+          <td>{{employee.name}}</td>
+          <td>{{employee.department}}</td>
+          <td>{{employee.joining_date}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  <h3>2. Search by name.</h3>
+  <input id="name" type="text" [(ngModel)]="employeeName">
+  <button (click)="searchByName()">Answer</button>
+  <div *ngIf="resultArr.length">
+    <h5>Id:- {{resultArr[0].id}}</h5>
+    <h5>Name:- {{resultArr[0].name}}</h5>
+    <h5>Department:- {{resultArr[0].department}}</h5>
+    <h5>Joining Date:- {{resultArr[0].joining_date}}</h5>
+  </div>
+  <div *ngIf="resultArr.length == 0 && clicked">
+    <h2>Employee not present</h2>
+  </div>
+  <h3>3. Find all candidates with experience more than 2 years.</h3>
+  <button (click)="experienceFilter()">Answer</button>
+  <br><br>
+  <div *ngIf="experienceFilterFlag">
+    <table style="width:50%">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Joining Date</th>
+      </tr>
+      <ng-container *ngFor="let employee of resultArrYear">
+        <tr>
+          <td>{{employee.id}}</td>
+          <td>{{employee.name}}</td>
+          <td>{{employee.department}}</td>
+          <td>{{employee.joining_date}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  <h3>4. Get distinct departments and count of candidates in each.</h3>
+  <button (click)="distinctDept()">Answer</button>
+  <br><br>
+  <div *ngIf="distinctDeptFlag">
+    <table>
+      <tr>
+        <th>Department name</th>
+        <th>count</th>
+      </tr>
+      <ng-container *ngFor="let dept of distinctDeptArr">
+        <tr>
+          <td>{{dept.name}}</td>
+          <td>{{dept.count}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  <h3>5. Remove all candidates from 'Development' department.</h3>
+  <button (click)="removeEmployee()">Answer</button>
+  <br>
+  <br>
+  <div *ngIf="removeEmployeeFlag">
+    <table style="width:50%">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Joining Date</th>
+      </tr>
+      <ng-container *ngFor="let employee of resultArrDept">
+        <tr>
+          <td>{{employee.id}}</td>
+          <td>{{employee.name}}</td>
+          <td>{{employee.department}}</td>
+          <td>{{employee.joining_date}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+</div>
